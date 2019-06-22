@@ -37,7 +37,7 @@ public class JobRepository {
 	public HashMap<String, Job> findJobsUser(String user_id) {
 		HashMap <String, Job> userJobs = new HashMap<String, Job>();
 		for (Map.Entry<String, Job> job : jobs.entrySet()) {
-			if (job.getValue().getUser_id() == user_id) {
+			if (job.getValue().getUser_id().equals(user_id)) {
 				userJobs.put(job.getKey(), job.getValue());
 			}
 		}

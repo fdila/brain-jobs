@@ -2,10 +2,8 @@ package backend.repository;
 import backend.model.Job;
 import backend.model.Job.*;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class JobRepository {
@@ -27,10 +25,12 @@ public class JobRepository {
 				"hey", Datatype.csv, "job1", date, Status.created));
 		jobs.put("job2", new Job("pippo", "prova", Language.Cpp, Framework.Keras,
 				"hey", Datatype.csv, "job2", date, Status.created));
+		jobs.put("job3", new Job("pippo", "prova", Language.Cpp, 
+				"hey", Datatype.csv, "job3", date, Status.created));
 	}
 
-	public Collection<Job> findAll() {
-		return this.jobs.values();
+	public HashMap<String, Job> findAll() {
+		return (HashMap<String, Job>) this.jobs;
 	}
 
 	
@@ -48,12 +48,4 @@ public class JobRepository {
 		this.jobs.put(job.getJob_id(), job);
 	}
 
-
-	public Job update(String job_id, Job job) {
-		return this.jobs.replace(job_id, job);
-	}
-
-	public Job delete(String job_id) {
-		return this.jobs.remove(job_id);
-	}
 }

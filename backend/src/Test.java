@@ -8,8 +8,8 @@ public class Test {
 	public static void main(String[] args) {
 		HashMap<String, Job> jobs = JobRepository.getInstance().findJobsUser("pippo");
 		for (Map.Entry<String, Job> job : jobs.entrySet()) {
-			System.out.println(job.getValue());
+			System.out.println(job.getKey());
+
 		}
 	}
-
 }

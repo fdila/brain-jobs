@@ -13,7 +13,7 @@ public class Job {
 	private Date created_at;
 	private Status status;
 	
-	enum Language {
+	public enum Language {
 		Python,
 		Java,
 		Scala,
@@ -22,7 +22,7 @@ public class Job {
 		Julia
 	}
 	
-	enum Framework {
+	public enum Framework {
 		Pytorch, 
 		Tensorflow, 
 		Caffe, 
@@ -32,13 +32,13 @@ public class Job {
 		Apache_singa
 	}
 	
-	enum Datatype {
+	public enum Datatype {
 		csv, 
 		avro, 
 		json
 	}
 	
-	enum Status {
+	public enum Status {
 		created, 
 		enqueued, 
 		building, 

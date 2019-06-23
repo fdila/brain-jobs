@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BrainJobs</title>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+	$(document).ready(function() {
+		var baseUrl = "http://localhost:8080/brainjobs-backend/api/v1/users/";
+		$("#userForm").submit(function(e){
+			var userName = $("#userName").val();
+			var userUrl = baseUrl + userName + "/jobs";
+			console.log(userUrl);
+			$.getJSON(userUrl, function(data) {
+				// Stampa (in caso di successo) il payload della risposta nella console
+				console.log(data);
+				$("#items").empty();
+				// Cicla sull'array contenuto nel payload della risposta
+				$(data).each(function(index, item) {
+					// Modifica il DOM appendendo all'elemento con id="items"
+					$("#items").append("<li>" + item.title + "</li>"
+							+ "<button onclick=dettagli(" + "\"" + item.job_id + "\")> Dettagli </button>");
+				});
+			});
+			return false;
+		});	
+	});
+	
+	function dettagli(id) {
+		var userName = $("#userName").val();
+		var url = "http://localhost:8080/brainjobs-backend/api/v1/users/" + userName + "/jobs/" + id;
+		$.getJSON(url, function(data) {
+			$("#detailsList").empty();
+			console.log(data);
+			$("#detailsList").append("titolo: " + data.title + "<br>");
+			$("#detailsList").append("utente: " + data.user_id  + "<br>");
+			$("#detailsList").append("status: " + data.status  + "<br>");
+			$("#detailsList").append("linguaggio: " + data.language  + "<br>");
+			$("#detailsList").append("framework: " + data.framework  + "<br>");
+			$("#detailsList").append("dataset: " + data.dataset  + "<br>");
+			$("#detailsList").append("dataset type: " + data.dataset_datatype  + "<br>");
+			$("#detailsList").append("data creazione: " + data.created_at  + "<br>");
+			$("#detailsList").append("job id: " + data.job_id  + "<br>");
+			
+		});
+	}
+	
+</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h1> BrainJobs Dashboard</h1>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md">
+						<form id="userForm">
+							UserId:
+							<input type="text" id="userName"> 
+							<input type="submit" value="Invia" id="userSearch">
+						</form>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md">
+						<ul id="items">
+						</ul>
+					</div>
+				</div>
+				<div class="row" id="details">
+					<div class="col-md">
+						<h4> Dettagli job</h4>
+						<ul id="detailsList">
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<h4> Inserisci nuovo job</h4>
+				<form id="userForm">
+					UserId: <br>
+					<input type="text" id="userId"> <br>
+					Title: <br>
+					<input type="text" id="userId"> <br>
+					Language: <br>
+					<input type="text" id="userId"> <br>
+					Framework: <br>
+					<input type="text" id="userId"> <br>
+					Dataset: <br>
+					<input type="text" id="userId"> <br>
+					Dataset_datatype: <br>
+					<input type="text" id="userId"> <br>
+					Model: <br>
+					<input type="text" id="userId"> <br> <br>
+					<input type="submit" value="Aggiungi Job" id="addJob">
+				</form>
+			</div>
+			
+		</div>
+		
+	</div>
+</body>
+</html>

@@ -16,7 +16,7 @@
 			$.getJSON(userUrl, function(data) {
 				// Stampa (in caso di successo) il payload della risposta nella console
 				console.log(data);
-				$("items").empty();
+				$("#items").empty();
 				// Cicla sull'array contenuto nel payload della risposta
 				$(data).each(function(index, item) {
 					// Modifica il DOM appendendo all'elemento con id="items"

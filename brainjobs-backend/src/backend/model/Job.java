@@ -1,6 +1,7 @@
 package backend.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Job {
 	private String user_id;
@@ -52,35 +53,50 @@ public class Job {
 	//Default
 	public Job() {
 		super();
+		Date date = new Date();
+		UUID uuid = UUID.randomUUID();
+		String job_id = uuid.toString();
+		this.job_id = job_id;
+		this.created_at = date;
+		this.status = Status.created;	
 	}
-
-	// Costruttore con framework
+	
+	//Costruttore con framework
 	public Job(String user_id, String title, Language language, Framework framework, String dataset,
-			Datatype dataset_datatype, String job_id, Date created_at, Status status) {
+			Datatype dataset_datatype) {
+		
 		super();
+		Date date = new Date();
+		UUID uuid = UUID.randomUUID();
+		String job_id = uuid.toString();
+		this.job_id = job_id;
+		this.created_at = date;
+		this.status = Status.created;
+		
 		this.user_id = user_id;
 		this.title = title;
 		this.language = language;
 		this.framework = framework;
 		this.dataset = dataset;
 		this.dataset_datatype = dataset_datatype;
-		this.job_id = job_id;
-		this.created_at = created_at;
-		this.status = status;
 	}
 	
-	// Costruttore senza framework
+	//Costruttore senza framework
 	public Job(String user_id, String title, Language language, String dataset,
-			Datatype dataset_datatype, String job_id, Date created_at, Status status) {
+			Datatype dataset_datatype) {
+	
 		super();
+		Date date = new Date();
+		UUID uuid = UUID.randomUUID();
+		String job_id = uuid.toString();
+		this.job_id = job_id;
+		this.created_at = date;
+		this.status = Status.created;	
 		this.user_id = user_id;
 		this.title = title;
 		this.language = language;
 		this.dataset = dataset;
 		this.dataset_datatype = dataset_datatype;
-		this.job_id = job_id;
-		this.created_at = created_at;
-		this.status = status;
 	}
 
 	public String getUser_id() {

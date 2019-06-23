@@ -3,6 +3,9 @@
 <meta charset="UTF-8">
 <title>BrainJobs</title>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script>
 	$(document).ready(function() {
 		var baseUrl = "http://localhost:8080/brainjobs-backend/api/v1/users/";
@@ -26,15 +29,52 @@
 </script>
 </head>
 <body>
-	<h1> BrainJobs Dashboard</h1>
-	<form id="userForm">
-		UserId:
-		<input type="text" id="userName"> 
-		<input type="submit" value="Invia" id="userSearch">
-	</form>
-	<div id="container">
-		<ul id="items">
-		</ul>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h1> BrainJobs Dashboard</h1>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="row">
+				<div class="col-md-12">
+					<form id="userForm">
+						UserId:
+						<input type="text" id="userName"> 
+						<input type="submit" value="Invia" id="userSearch">
+					</form>
+				</div>
+				<div class="col-md-12">
+					<ul id="items">
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<form id="userForm">
+						UserId: <br>
+						<input type="text" id="userId"> <br>
+						Title: <br>
+						<input type="text" id="userId"> <br>
+						Language: <br>
+						<input type="text" id="userId"> <br>
+						Framework: <br>
+						<input type="text" id="userId"> <br>
+						Dataset: <br>
+						<input type="text" id="userId"> <br>
+						Dataset_datatype: <br>
+						<input type="text" id="userId"> <br>
+						Model: <br>
+						<input type="text" id="userId"> <br> <br>
+						<input type="submit" value="Aggiungi Job" id="addJob">
+					</form>
+				</div>
+				
+			</div>
+			
+		</div>
+		
 	</div>
 </body>
 </html>

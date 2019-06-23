@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -31,7 +32,13 @@ public class BrainController {
 		if (jobs.isEmpty()) {
 			return Response.status(404).entity("{\"error\": \"NOT FOUND\"}").build();
 		}
-		return Response.ok(jobs.values()).build();
+		return Response.ok(jobs.values())
+				.header("Access-Control-Allow-Origin", "*")
+	            .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+	            .header("Access-Control-Allow-Credentials", "true")
+	            .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+	            .header("Access-Control-Max-Age", "1209600")
+				.build();
 	}
 	
 	@POST
@@ -62,4 +69,7 @@ public class BrainController {
 		
 		return Response.ok(job).build();
 	}
+	
 }
+
+

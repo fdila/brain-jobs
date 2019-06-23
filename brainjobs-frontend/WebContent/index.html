@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BrainJobs</title>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var baseUrl = "http://localhost:8080/brainjobs-backend/api/v1/users/";
+		$("#userForm").submit(function(e){
+			var userName = $("#userName").val();
+			var userUrl = baseUrl + userName + "/jobs";
+			console.log(userUrl);
+			$.getJSON(userUrl, function(data) {
+				// Stampa (in caso di successo) il payload della risposta nella console
+				console.log(data);
+				$("items").empty();
+				// Cicla sull'array contenuto nel payload della risposta
+				$(data).each(function(index, item) {
+					// Modifica il DOM appendendo all'elemento con id="items"
+					$("#items").append("<li id=" + item.job_id + ">" + item.title + "</li>");
+				});
+			});
+			return false;
+		});	
+	});
+</script>
+</head>
+<body>
+	<h1> BrainJobs Dashboard</h1>
+	<form id="userForm">
+		UserId:
+		<input type="text" id="userName"> 
+		<input type="submit" value="Invia" id="userSearch">
+	</form>
+	<div id="container">
+		<ul id="items">
+		</ul>
+	</div>
+</body>
+</html>

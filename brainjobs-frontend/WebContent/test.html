@@ -15,12 +15,12 @@
 			var userUrl = baseUrl + userName + "/jobs";
 			console.log(userUrl);
 			$.getJSON(userUrl, function(data) {
-				// Stampa (in caso di successo) il payload della risposta nella console
+			
 				console.log(data);
+				
 				$("#items").empty();
-				// Cicla sull'array contenuto nel payload della risposta
+				
 				$(data).each(function(index, item) {
-					// Modifica il DOM appendendo all'elemento con id="items"
 					$("#items").append("<li>" + item.title + "</li>"
 							+ "<button onclick=dettagli(" + "\"" + item.job_id + "\")> Dettagli </button>");
 				});
@@ -42,13 +42,22 @@
 			    method: 'POST',
 			    dataType: 'json',
 			    data: data,
-			    success: function(data){
-			    	//TODO refreshare i jobs
+			    complete: function(data){
+			    	$.getJSON(userUrl, function(dataGet) {
+						
+						console.log(dataGet);
+						
+						$("#items").empty();
+						
+						$(dataGet).each(function(index, item) {
+							
+							$("#items").append("<li>" + item.title + "</li>"
+									+ "<button onclick=dettagli(" + "\"" + item.job_id + "\")> Dettagli </button>");
+						});
+					});
 			  	}
 			});
-			
-			
-			
+					
 			return false;
 		});
 		

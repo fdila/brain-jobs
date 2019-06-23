@@ -19,7 +19,7 @@ public class JobRepository {
 	}
 	private JobRepository() {
 		this.jobs = new HashMap<>();
-		Job job = new Job("pippo", "titolo", Language.Cpp, Framework.Caffe, "dataset", Datatype.json);
+		Job job = new Job("pippo", "titolo", Language.Cpp, Framework.Caffe, "dataset", Datatype.json, "sadaaee");
 		jobs.put(job.getJob_id(), job);
 	}
 

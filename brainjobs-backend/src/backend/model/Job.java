@@ -10,6 +10,7 @@ public class Job {
 	private Framework framework;
 	private String dataset;
 	private Datatype dataset_datatype;
+	private String model;
 	private String job_id;
 	private Date created_at;
 	private Status status;
@@ -63,7 +64,7 @@ public class Job {
 	
 	//Costruttore con framework
 	public Job(String user_id, String title, Language language, Framework framework, String dataset,
-			Datatype dataset_datatype) {
+			Datatype dataset_datatype, String model) {
 		
 		super();
 		Date date = new Date();
@@ -79,11 +80,12 @@ public class Job {
 		this.framework = framework;
 		this.dataset = dataset;
 		this.dataset_datatype = dataset_datatype;
+		this.setModel(model);
 	}
 	
 	//Costruttore senza framework
 	public Job(String user_id, String title, Language language, String dataset,
-			Datatype dataset_datatype) {
+			Datatype dataset_datatype, String model) {
 	
 		super();
 		Date date = new Date();
@@ -97,6 +99,7 @@ public class Job {
 		this.language = language;
 		this.dataset = dataset;
 		this.dataset_datatype = dataset_datatype;
+		this.setModel(model);
 	}
 
 	public String getUser_id() {
@@ -147,6 +150,14 @@ public class Job {
 		this.dataset_datatype = dataset_datatype;
 	}
 
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
 	public String getJob_id() {
 		return job_id;
 	}
@@ -181,6 +192,7 @@ public class Job {
 		result = prime * result + ((framework == null) ? 0 : framework.hashCode());
 		result = prime * result + ((job_id == null) ? 0 : job_id.hashCode());
 		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
@@ -217,6 +229,11 @@ public class Job {
 			return false;
 		if (language != other.language)
 			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
 		if (status != other.status)
 			return false;
 		if (title == null) {
@@ -235,8 +252,8 @@ public class Job {
 	@Override
 	public String toString() {
 		return "Job [user_id=" + user_id + ", title=" + title + ", language=" + language + ", framework=" + framework
-				+ ", dataset=" + dataset + ", dataset_datatype=" + dataset_datatype + ", job_id=" + job_id
-				+ ", created_at=" + created_at + ", status=" + status + "]";
+				+ ", dataset=" + dataset + ", dataset_datatype=" + dataset_datatype + ", model=" + model + ", job_id="
+				+ job_id + ", created_at=" + created_at + ", status=" + status + "]";
 	}
 	
 }

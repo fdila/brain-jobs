@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 <title>BrainJobs</title>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize-object.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,18 +15,73 @@
 			var userUrl = baseUrl + userName + "/jobs";
 			console.log(userUrl);
 			$.getJSON(userUrl, function(data) {
-				// Stampa (in caso di successo) il payload della risposta nella console
+			
 				console.log(data);
+				
 				$("#items").empty();
-				// Cicla sull'array contenuto nel payload della risposta
+				
 				$(data).each(function(index, item) {
-					// Modifica il DOM appendendo all'elemento con id="items"
-					$("#items").append("<li id=" + item.job_id + ">" + item.title + "</li>");
+					$("#items").append("<li>" + item.title + "</li>"
+							+ "<button onclick=dettagli(" + "\"" + item.job_id + "\")> Dettagli </button>");
 				});
 			});
 			return false;
-		});	
+		});
+		
+		$("#jobForm").submit(function(e){
+			var userName = $("#userName").val();
+			var userUrl = baseUrl + userName + "/jobs";
+			
+			var data = JSON.stringify($("#jobForm").serializeObject());
+			
+			$.ajax({
+			    url: userUrl,
+			    headers: {
+			        'Content-Type':'application/json'
+			    },
+			    method: 'POST',
+			    dataType: 'json',
+			    data: data,
+			    complete: function(data){
+			    	$.getJSON(userUrl, function(dataGet) {
+						
+						console.log(dataGet);
+						
+						$("#items").empty();
+						
+						$(dataGet).each(function(index, item) {
+							
+							$("#items").append("<li>" + item.title + "</li>"
+									+ "<button onclick=dettagli(" + "\"" + item.job_id + "\")> Dettagli </button>");
+						});
+					});
+			  	}
+			});
+					
+			return false;
+		});
+		
 	});
+	
+	function dettagli(id) {
+		var userName = $("#userName").val();
+		var url = "http://localhost:8080/brainjobs-backend/api/v1/users/" + userName + "/jobs/" + id;
+		$.getJSON(url, function(data) {
+			$("#detailsList").empty();
+			console.log(data);
+			$("#detailsList").append("titolo: " + data.title + "<br>");
+			$("#detailsList").append("utente: " + data.user_id  + "<br>");
+			$("#detailsList").append("status: " + data.status  + "<br>");
+			$("#detailsList").append("linguaggio: " + data.language  + "<br>");
+			$("#detailsList").append("framework: " + data.framework  + "<br>");
+			$("#detailsList").append("dataset: " + data.dataset  + "<br>");
+			$("#detailsList").append("dataset type: " + data.dataset_datatype  + "<br>");
+			$("#detailsList").append("data creazione: " + data.created_at  + "<br>");
+			$("#detailsList").append("job id: " + data.job_id  + "<br>");
+			
+		});
+	}
+	
 </script>
 </head>
 <body>
@@ -37,40 +93,70 @@
 		</div>
 		
 		<div class="row">
-			<div class="row">
-				<div class="col-md-12">
-					<form id="userForm">
-						UserId:
-						<input type="text" id="userName"> 
-						<input type="submit" value="Invia" id="userSearch">
-					</form>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md">
+						<form id="userForm">
+							UserId:
+							<input type="text" id="userName"> 
+							<input type="submit" value="Invia" id="userSearch">
+						</form>
+					</div>
 				</div>
-				<div class="col-md-12">
-					<ul id="items">
-					</ul>
+				<div class="row">
+					<div class="col-md">
+						<ul id="items">
+						</ul>
+					</div>
+				</div>
+				<div class="row" id="details">
+					<div class="col-md">
+						<h4> Dettagli job</h4>
+						<ul id="detailsList">
+						</ul>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<form id="userForm">
-						UserId: <br>
-						<input type="text" id="userId"> <br>
-						Title: <br>
-						<input type="text" id="userId"> <br>
-						Language: <br>
-						<input type="text" id="userId"> <br>
-						Framework: <br>
-						<input type="text" id="userId"> <br>
-						Dataset: <br>
-						<input type="text" id="userId"> <br>
-						Dataset_datatype: <br>
-						<input type="text" id="userId"> <br>
-						Model: <br>
-						<input type="text" id="userId"> <br> <br>
-						<input type="submit" value="Aggiungi Job" id="addJob">
-					</form>
-				</div>
-				
+			
+			<div class="col-md-6">
+				<h4> Inserisci nuovo job</h4>
+				<form id="jobForm">
+					UserId: <br>
+					<input type="text" name="user_id" required> <br>
+					Title: <br>
+					<input type="text" name="title" required> <br>
+					Language: <br>
+					<select name="language" required>
+						<option value="Python"> Python </option>
+						<option value="Java"> Java</option>
+						<option value="Scala"> Scala </option>
+						<option value="R"> R </option>
+						<option value="Cpp"> Cpp </option>
+						<option value="Julia"> Julia </option>
+					</select> <br>
+					Framework: <br>
+					<select name="framework">
+						<option value=""> </option>
+						<option value="Pytorch"> Pytorch </option>
+						<option value="Tensorflow"> Tensorflow </option>
+						<option value="Caffe"> Caffe </option>
+						<option value="Keras"> Keras </option>
+						<option value="Deeplearning4j"> Deeplearning4j </option>
+						<option value="Apache_mahout"> Apache_mahout </option>
+						<option value="Apache_singa"> Apache_singa </option>
+					</select> <br>
+					Dataset: <br>
+					<input type="text" name="dataset" required> <br>
+					Dataset_datatype: <br>
+					<select name="dataset_datatype" required>
+						<option value="csv"> csv </option>
+						<option value="avro"> avro </option>
+						<option value="json"> json </option>
+					</select> <br>
+					Model: <br>
+					<input type="text" name="model" required> <br> <br>
+					<input type="submit" value="Aggiungi Job" id="addJob">
+				</form>
 			</div>
 			
 		</div>

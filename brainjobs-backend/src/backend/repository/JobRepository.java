@@ -2,13 +2,12 @@ package backend.repository;
 import backend.model.Job;
 import backend.model.Job.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JobRepository {
 
-	private Map<String, Job> jobs;
+	private HashMap<String, Job> jobs;
 
 	private static JobRepository instance = null;
 
@@ -20,17 +19,12 @@ public class JobRepository {
 	}
 	private JobRepository() {
 		this.jobs = new HashMap<>();
-		Date date = new Date();
-		jobs.put("job1", new Job("pippo", "prova", Language.Cpp, Framework.Keras,
-				"hey", Datatype.csv, "job1", date, Status.created));
-		jobs.put("job2", new Job("pippo", "prova", Language.Cpp, Framework.Keras,
-				"hey", Datatype.csv, "job2", date, Status.created));
-		jobs.put("job3", new Job("pippo", "prova", Language.Cpp, 
-				"hey", Datatype.csv, "job3", date, Status.created));
+		Job job = new Job("pippo", "titolo", Language.Cpp, Framework.Caffe, "dataset", Datatype.json, "sadaaee");
+		jobs.put(job.getJob_id(), job);
 	}
 
 	public HashMap<String, Job> findAll() {
-		return (HashMap<String, Job>) this.jobs;
+		return this.jobs;
 	}
 
 	

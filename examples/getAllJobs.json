@@ -1,0 +1,25 @@
+[
+    {
+        "created_at": "2019-06-25T15:30:00.171Z[UTC]",
+        "dataset": "dataset",
+        "dataset_datatype": "json",
+        "framework": "Caffe",
+        "job_id": "124e29bc-d98b-4e6f-9bab-4811970e48c4",
+        "language": "Cpp",
+        "model": "sadaaee",
+        "status": "created",
+        "title": "titolo",
+        "user_id": "pippo"
+    },
+    {
+        "created_at": "2019-06-25T15:43:33.481Z[UTC]",
+        "dataset": "hey",
+        "dataset_datatype": "csv",
+        "framework": "Keras",
+        "job_id": "e44c38f3-2e57-47e2-9c74-2c65ac47ce57",
+        "language": "Cpp",
+        "status": "created",
+        "title": "prova",
+        "user_id": "pippo"
+    }
+]

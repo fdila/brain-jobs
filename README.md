@@ -32,14 +32,19 @@ Attraverso la dashboard è possibile visualizzare tutti i job di un utente, visu
 L'interfaccia è responsive, sviluppata grazie a Bootstrap.
 
 ### brain-gateway
-WIP
 Ponte tra backend e frontend.
+
+Riceve le richieste dal frontend, le inoltra al backend e restituisce la risposta al frontend.
+
+Gli endpoint sono gli stessi del backend.
+
+
 
 ## Deployment
 Tutti i progetti sono eseguiti dallo stesso server Tomcat v8.5
 
 ## Strumenti utilizzati
-[Postman](https://www.getpostman.com/) per testare le API durante lo sviluppo backend.
+[Postman](https://www.getpostman.com/) per testare le API durante lo sviluppo di backend e gateway.
 
 [Bootstrap](https://getbootstrap.com/) per la parte grafica del frontend.
 

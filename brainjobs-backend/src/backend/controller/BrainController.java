@@ -32,15 +32,6 @@ public class BrainController {
 		}
 		return Response.ok(jobs.values()).build();
 	}
-	
-	@GET
-	@Path("/jobs")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getJobsUser() {
-
-		HashMap<String, Job> jobs = JobRepository.getInstance().findAll();
-		return Response.ok(jobs.values()).build();
-	}
 
 	@POST
 	@Path("/{user_id}/jobs")
@@ -59,7 +50,7 @@ public class BrainController {
 	@GET
 	@Path("/{user_id}/jobs/{job_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getJobsUser(@PathParam("user_id") String user_id, @PathParam("job_id") String job_id) {
+	public Response getJobDetail(@PathParam("user_id") String user_id, @PathParam("job_id") String job_id) {
 
 		HashMap<String, Job> jobs = JobRepository.getInstance().findJobsUser(user_id);
 		Job job = jobs.get(job_id);

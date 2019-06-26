@@ -9,7 +9,7 @@
 
 <script>
 	$(document).ready(function() {
-		var baseUrl = "http://localhost:8080/brainjobs-backend/api/v1/users/";
+		var baseUrl = "http://localhost:8080/brainjobs-gateway/api/v1/users/";
 		$("#userForm").submit(function(e){
 			var userName = $("#userName").val();
 			var userUrl = baseUrl + userName + "/jobs";

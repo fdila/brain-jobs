@@ -1,0 +1,11 @@
+{
+    "created_at": "2019-06-25T15:43:33.481Z[UTC]",
+    "dataset": "hey",
+    "dataset_datatype": "csv",
+    "framework": "Keras",
+    "job_id": "e44c38f3-2e57-47e2-9c74-2c65ac47ce57",
+    "language": "Cpp",
+    "status": "created",
+    "title": "prova",
+    "user_id": "pippo"
+}
